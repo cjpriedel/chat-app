@@ -25,7 +25,7 @@ export const MessageRoom = () => {
   
       dummy.current.scrollIntoView({behavior: 'smooth'})
     }
-    console.log(auth.currentUser.displayName)
+    
     return <>
     <main>
   
