@@ -3,6 +3,8 @@ import firebase from 'firebase/compat/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { ChatMessage } from './ChatMessage'
 
+
+
 export const MessageRoom = () => {
     const dummy = useRef()
     const firestore = firebase.firestore()
@@ -13,12 +15,14 @@ export const MessageRoom = () => {
     const auth = firebase.auth()
     const sendMessage = async(e) => {
       e.preventDefault()
-      const { uid } = auth.currentUser
+      const { uid, photoURL, displayName } = auth.currentUser
   
       await messagesRef.add({
         text: formValue,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        uid
+        uid,
+        photoURL,
+        displayName
       }) // creates a new document in firebase db by assigning formValue
   
       setFormValue('')
@@ -26,6 +30,8 @@ export const MessageRoom = () => {
       dummy.current.scrollIntoView({behavior: 'smooth'})
     }
     
+    console.log(auth)
+
     return <>
     <main>
   
